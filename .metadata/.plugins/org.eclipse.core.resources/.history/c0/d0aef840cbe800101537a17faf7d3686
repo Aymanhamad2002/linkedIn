@@ -1,0 +1,8 @@
+package com.linkedin.features.authentication.services;
+
+import com.linkedin.features.authentication.entities.User;
+
+public interface IUserService {
+	public User getUser();
+
+}

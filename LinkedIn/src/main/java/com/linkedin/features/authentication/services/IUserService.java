@@ -1,0 +1,13 @@
+package com.linkedin.features.authentication.services;
+
+import com.linkedin.features.authentication.DTO.UserRequestDto;
+import com.linkedin.features.authentication.DTO.UserResponseDto;
+
+import com.linkedin.features.authentication.entities.User;
+
+public interface IUserService {
+	public User getUser(String email);
+
+	public UserResponseDto register(UserRequestDto registerRequest);
+
+}

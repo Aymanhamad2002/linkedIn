@@ -1,0 +1,46 @@
+package com.linkedin.features.authentication.services;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.linkedin.features.authentication.DTO.UserRequestDto;
+import com.linkedin.features.authentication.DTO.UserResponseDto;
+import com.linkedin.features.authentication.entities.User;
+import com.linkedin.features.authentication.exception.AlreadyExistException;
+import com.linkedin.features.authentication.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class UserService implements IUserService {
+	private final UserRepository userRepository;
+	private final PasswordEncoder passwordEncoder;
+
+	@Override
+	public User getUser(String  email) {
+		// TODO Auto-generated method stub
+		return userRepository.
+				findByEmail(email)
+				.orElseThrow(() -> new IllegalArgumentException("User not found"));
+	}
+
+	@Override
+	public UserResponseDto register(UserRequestDto registerRequest) {
+		// TODO Auto-generated method stub
+		userRepository.findByEmail(registerRequest.getEmail()).ifPresentOrElse((user)-> {throw new AlreadyExistException("email already exists! ");},
+				() ->{
+					User user = User.builder()
+							.email(registerRequest.getEmail())
+							.password(passwordEncoder.encode(registerRequest.getPassword()))
+							.build();
+					userRepository.save(user);
+					
+				});
+		
+	}
+	
+	
+
+}

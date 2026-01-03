@@ -1,0 +1,5 @@
+package com.linkedin.features.authentication.DTO;
+
+public class UserResponseDto {
+
+}

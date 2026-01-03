@@ -1,0 +1,29 @@
+package com.linkedin.core.security.config;
+
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import com.linkedin.features.authentication.entities.User;
+import com.linkedin.features.authentication.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Configuration
+public class loadDataBaseConfiguration {
+	private final UserRepository userRepository;
+	private final PasswordEncoder passwordEncoder;
+	@Bean CommandLineRunner initDatabase() {
+		return args ->{
+			User user1  = new User(null, "ayman@gmail.com",passwordEncoder.encode("12342"));
+			User user2 = new User(null, "test@gmail.com",passwordEncoder.encode("12342"));
+			userRepository.save(user1);
+			userRepository.save(user2);
+		};
+		
+	}
+
+}

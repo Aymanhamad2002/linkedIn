@@ -1,0 +1,33 @@
+package com.linkedin.features.authentication.controllers;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.linkedin.features.authentication.DTO.UserRequestDto;
+import com.linkedin.features.authentication.DTO.UserResponseDto;
+import com.linkedin.features.authentication.entities.User;
+import com.linkedin.features.authentication.services.IUserService;
+import com.linkedin.features.authentication.services.UserService;
+
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+@RequiredArgsConstructor
+@RestController
+@RequestMapping("/api/v1/authentication")
+public class AuthenticationController {
+	private final IUserService userService;
+	@GetMapping("/user")
+	public User getUser(@RequestParam String email) {
+		return userService.getUser(email);
+	}
+	@PostMapping("/register")
+	public UserResponseDto register(@Valid @RequestBody UserRequestDto registerRequest) {
+		return userService.register(registerRequest);
+		
+	}
+	
+}

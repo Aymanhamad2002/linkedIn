@@ -1,0 +1,5 @@
+package com.linkedin.core.security.config;
+
+public class WebAuthConfiguration {
+
+}

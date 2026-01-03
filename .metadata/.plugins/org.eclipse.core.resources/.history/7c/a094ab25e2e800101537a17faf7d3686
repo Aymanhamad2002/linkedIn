@@ -1,0 +1,5 @@
+package com.linkedin.dto;
+
+public class ErrorResponse {
+
+}

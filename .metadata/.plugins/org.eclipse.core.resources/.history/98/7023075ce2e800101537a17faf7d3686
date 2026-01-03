@@ -1,0 +1,15 @@
+package com.linkedin;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import com.linkedin.exception.AlreadyExistException;
+
+@ControllerAdvice
+public class BackendController {
+
+	
+	@ExceptionHandler(AlreadyExistException.class)
+	public ResponseEntity
+}
